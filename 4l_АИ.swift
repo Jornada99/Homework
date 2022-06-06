@@ -32,7 +32,6 @@ class SportCar: Car {
     enum Mode {
         case engineIsOn 
         case engineIsOff
-        case speed(speed: Int) // new special case
     }
         
     mutating func engine(engineMode: Mode) {
@@ -69,13 +68,16 @@ class SportCar: Car {
         }
     }
             
-    case let .speed(speed): // new special action
+    func speed(speed: Int) { // new special action
+    
         if speed == self.maxSpeed {
             print("You have reached the maximum speed")
-                } else if speed > self.maxSpeed {
-                    self.engineOn = false
-                    print("Emergency stop.")
-                }
+        } else if speed > self.maxSpeed {
+            self.engineOn = false
+            print("Emergency stop.")
+        } else {
+            let difference = self.maxSpeed - speed
+            print("\(difference) km / h left before reaching the maximum speed.")
         }
         
     }
@@ -95,10 +97,10 @@ class SportCar: Car {
 class TrunkCar: Car {
 
 // new properties
-    let loadCapacity: loadCapacity
-    let numberOfPallets: numberOfPallets
+    let loadCapacity: loadCapacityEnum
+    let numberOfPallets: numberOfPalletsEnum
     
-    enum loadCapacity {
+    enum loadCapacityEnum {
         case oneT = 1
         case twoT = 2
         case threeT = 3
@@ -106,7 +108,7 @@ class TrunkCar: Car {
         case sevenT = 7
     }
     
-    enum numberOfPallets {
+    enum numberOfPalletsEnum {
         case fourP = 4
         case sixP = 6
         case eightP = 8
@@ -115,10 +117,9 @@ class TrunkCar: Car {
     enum Mode {
         case engineIsOn 
         case engineIsOff
-        case сlassCar(loadCapacity) // new special case
     }
     
-    mutating func engine(engineMode: Mode) {
+    func engine(engineMode: Mode) {
         
         switch engineMode {
             case .engineIsOn:
@@ -130,7 +131,7 @@ class TrunkCar: Car {
         }
     }
     
-    mutating func windows() {
+    func windows() {
         if self.windowsOpen == true {
             self.windowsOpen = false
             print("Now the windows are open. Сlose the windows.")
@@ -152,7 +153,7 @@ class TrunkCar: Car {
         }
     }
     
-    func classCar(classCar: Mode) {
+    func classCar(classCar: loadCapacityEnum) {
         
         switch classCar {
             case .oneT:
