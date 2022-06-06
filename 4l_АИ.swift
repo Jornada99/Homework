@@ -153,7 +153,7 @@ class TrunkCar: Car {
         }
     }
     
-    func classCar(classCar: loadCapacityEnum) {
+    func classCar(classCar: loadCapacityEnum) { // new special action
         
         switch classCar {
             case .oneT:
